@@ -1,22 +1,22 @@
 variable "ami_id" {
   type        = string
   default     = "ami-09c813fb71547fc4f"
-  description = "this is AMI id of devops-practice with RHEL-9"
-
+  description = "This is the AMI ID of devops-practice which is RHEL-9"
 }
 
 variable "instance_type" {
     type = string
-    default = "t2.micro"
+    default = "t3.micro"
 }
 
 variable "tags" {
-   default = {
+    type = map #optional
+    default = {
         Name = "backend"
-        project = "expense"
-        component = "backend"
-        environment = "DEV"
-        terraform = "true"
+        Project = "expense"
+        Component = "backend"
+        Environment = "DEV"
+        Terraform = "true"
     }
 }
 
@@ -25,7 +25,7 @@ variable "sg_name" {
 }
 
 variable "sg_description" {
-    default = "allow port no 22 for ssh1 conncetion"
+    default = "Allow port number 22 for SSH access"
 }
 
 variable "from_port" {
@@ -46,4 +46,3 @@ variable "ingress_cidr" {
     type = list(string)
     default = ["0.0.0.0/0"]
 }
-

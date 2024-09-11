@@ -3,6 +3,7 @@ resource "aws_security_group" "allow_ssh1" {
   description = var.sg_description
   
  #outgoing traffic
+ #block
   egress {
     from_port        = 0
     to_port          = 0
