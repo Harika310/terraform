@@ -28,7 +28,7 @@ resource "aws_security_group" "allow_ssh1" {
 resource "aws_instance" "terraform" {
 
    ami = "ami-09c813fb71547fc4f" 
-   count = 3
+   count = length(var.instance_names)
    instance_type = "t2.micro"
    vpc_security_group_ids = [aws_security_group.allow_ssh1.id] 
    tags = {
