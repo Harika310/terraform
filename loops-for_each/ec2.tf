@@ -1,14 +1,3 @@
-resource "aws_instance" "expense" {
-
-   ami = data.aws_ami.devops.id
-   instance_type = "t2.micro"
-   vpc_security_group_ids = [aws_security_group.allow_ssh1.id] 
-    tags = {
-      Name = "terraform"
-    }
-     
- }
-
 resource "aws_security_group" "allow_ssh1" {
   name        = "allow_ssh1"
   description = "Allow ssh1 inbound traffic and all outbound traffic"
@@ -31,8 +20,18 @@ resource "aws_security_group" "allow_ssh1" {
     ipv6_cidr_blocks = ["::/0"]
   } 
 
-  tags = {
-     Name = "allow_ssh1"
+ tags = {
+    Name = "allow_ssh1"
+  }
+} 
+
+resource "aws_instance" "terraform" {
+   for_each = var.instance_type
+   ami = "ami-09c813fb71547fc4f" 
+   instance_type = each.value
+   vpc_security_group_ids = [aws_security_group.allow_ssh1.id] 
+   tags = {
+    Name = each.key
   }
 
-} 
+}
