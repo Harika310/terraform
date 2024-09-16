@@ -25,7 +25,7 @@ resource "aws_security_group" "allow_ssh1" {
   }
 } 
 
-resource "aws_instance" "terraform" {
+resource "aws_instance" "expense" {
    for_each = var.instance_type
    ami = "ami-09c813fb71547fc4f" 
    instance_type = each.value
